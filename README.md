@@ -1,4 +1,4 @@
-﻿
+
 # Robustness of Time-Series Momentum Across Asset Classes
 
 ## Project Overview
@@ -58,7 +58,7 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 |---|---|---|
 | 3A | Python & Research Infrastructure | Completed |
 | 3B | Research Hypotheses & Experimental Protocol | Completed |
-| 3C | Predictive Signal Analysis | Planned |
+| 3C | Predictive Signal Analysis | In Progress — Session 3C.01 Completed |
 | 3D | Strategy Construction | Planned |
 | 3E | Realistic Backtesting | Planned |
 | 3F | Statistical Robustness & Out-of-Sample Evaluation | Planned |
@@ -78,9 +78,15 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 - Session 02: Selection of 16 ETFs, data-source conventions, and historical data availability audit (2009–2025 checks completed).
 - Session 03: Research protocol finalization, chronological Train / Validation / Test split, signal specifications, evaluation metrics, and robustness framework.
 
+**Phase 3C — Predictive Signal Analysis**
+
+- Session 01: Monthly momentum signal construction, one-month forward returns and directional targets, Train / Validation preparation, temporal alignment, data cleaning, and validation checks.
+
 ### Next Steps
 
-- **3C — Predictive Signal Analysis:** Construct and evaluate monthly momentum signals using Train and Validation data.
+
+- **3C.02 — Predictive Analysis:** Begin by refactoring the signal and target cleaning logic into a reusable function in `src/signals.py`. Then evaluate the 12-month momentum signal using Accuracy, Balanced Accuracy, directional Recall, confusion matrices, and baseline comparisons.
+- **3C.03 — Cross-Asset & Lookback Robustness:** Analyze predictive performance across assets and asset classes, and compare the predefined 3-, 6-, and 12-month momentum horizons.
 - **3D — Strategy Construction:** Translate predictive signals into systematic trading rules without accessing Test results.
 - **3E — Realistic Backtesting:** Evaluate strategy performance on Train and Validation, including transaction costs, slippage, turnover, and risk metrics.
 - **3F — Statistical Robustness & Out-of-Sample Evaluation:** Conduct robustness testing and perform the final evaluation on the untouched Test period (2022–2025).
@@ -95,7 +101,12 @@ time-series-momentum-research/
 │   ├── 3A_01_temporal_data.ipynb
 │   ├── 3A_02_data_manipulation.ipynb
 │   ├── 3A_03_validation_debugging.ipynb
-│   └── 3B_02_data_availability.ipynb
+│   ├── 3B_02_data_availability.ipynb
+│   └── 3C_01_signal_construction.ipynb
+│
+├── src/
+│   ├── data.py
+│   └── signals.py
 │
 ├── docs/
 │   ├── 3B_01_research_foundations.md
@@ -107,7 +118,7 @@ time-series-momentum-research/
 └── .gitignore
 ```
 
-The repository will evolve as the research progresses.
+The repository will evolve as the research progresses. Reusable Python functions are progressively separated from research notebooks to improve code organization, reproducibility, and maintainability.
 
 ## Research Documentation
 
@@ -136,13 +147,13 @@ python -m pip install -r requirements.txt
 
 ## Research Limitations
 
-This project has completed its research design phase and is preparing to begin empirical predictive signal analysis.
+Phase 3C.01 has completed the construction and validation of the primary 12-month momentum dataset, with 1,531 valid Train observations and 765 valid Validation observations.
 
-No statistically robust predictive relationship or economically exploitable trading strategy has been established.
+Predictive performance and statistical robustness have not yet been evaluated. The 16 ETF proxies may introduce structural biases related to fees, currency exposure, credit risk, and futures roll effects.
 
-Future analyses will explicitly consider data quality, temporal alignment, overlapping observations, transaction costs, model selection bias, and out-of-sample performance.
+Future analyses will address temporal dependence, data leakage, overfitting, transaction costs, and model robustness. The Test period (2022–2025) remains untouched until Phase 3F.
 
-Historical results will not be treated as evidence of future profitability without appropriate statistical and methodological validation.
+No statistically robust predictive relationship or economically exploitable strategy has been established.
 
 ## Author
 
