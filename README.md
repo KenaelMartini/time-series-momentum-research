@@ -30,7 +30,7 @@ The intended research universe includes:
 - **Foreign Exchange:** FXE, FXY, FXB, FXA.
 - **Fixed Income:** IEF, TLT, LQD, HYG.
 
-Session 3B.02 selected these 16 USD-listed ETFs. The planned historical research window covers January 2008 through December 2025, with structural data checks documented in Phase 3B.02. Phase 3C currently loads data only through December 2021; the 2022–2025 Test period remains untouched. The predictive research protocol was finalized in Phase 3B.03. ETF returns may reflect currency exposure, fees, credit risk, and commodity futures roll effects.
+Session 3B.02 selected these 16 USD-listed ETFs. Historical data cover January 2008 through December 2025, with structural data checks documented in Phase 3B.02. The predictive research protocol was finalized in Phase 3B.03. ETF returns may reflect currency exposure, fees, credit risk, and commodity futures roll effects.
 
 ## Research Methodology
 
@@ -58,7 +58,7 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 |---|---|---|
 | 3A | Python & Research Infrastructure | Completed |
 | 3B | Research Hypotheses & Experimental Protocol | Completed |
-| 3C | Predictive Signal Analysis | In progress (3C.01 completed) |
+| 3C | Predictive Signal Analysis | Planned |
 | 3D | Strategy Construction | Planned |
 | 3E | Realistic Backtesting | Planned |
 | 3F | Statistical Robustness & Out-of-Sample Evaluation | Planned |
@@ -78,15 +78,9 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 - Session 02: Selection of 16 ETFs, data-source conventions, and historical data availability audit (2009–2025 checks completed).
 - Session 03: Research protocol finalization, chronological Train / Validation / Test split, signal specifications, evaluation metrics, and robustness framework.
 
-**Phase 3C — Predictive Signal Analysis**
-
-- **Session 3C.01 (completed):** Constructed the monthly 12-month momentum signal, directional predictions, one-month forward returns and direction targets for 16 ETFs. Verified temporal alignment and performed manual calculation sanity checks. Prepared chronologically separated Train (2010–2017 realized returns) and Validation (2018–2021 realized returns) datasets, with validity masks preserving excluded observations as `NaN`.
-- **Data preparation summary:** Train: 1,531 valid asset-month observations out of 1,536 (5 excluded). Validation: 765 valid asset-month observations out of 768 (3 excluded). Validity masks exclude missing values, zero signals and zero targets. No predictive accuracy or trading-performance claim has been established.
-
 ### Next Steps
 
-- **3C.02 — Predictive Analysis:** Start by refactoring the existing masking and cleaning logic into a reusable function (planned for `src/signals.py`); this function has **not** yet been implemented. Then evaluate the primary 12-month signal on Train and Validation using Accuracy, Balanced Accuracy, directional Recall, confusion matrices and baselines.
-- **3C.03 — Cross-Asset & Lookback Robustness:** Compare assets and classes and assess the pre-specified 3- and 6-month alternative lookbacks without selecting a new primary model based on Validation results.
+- **3C — Predictive Signal Analysis:** Construct and evaluate monthly momentum signals using Train and Validation data.
 - **3D — Strategy Construction:** Translate predictive signals into systematic trading rules without accessing Test results.
 - **3E — Realistic Backtesting:** Evaluate strategy performance on Train and Validation, including transaction costs, slippage, turnover, and risk metrics.
 - **3F — Statistical Robustness & Out-of-Sample Evaluation:** Conduct robustness testing and perform the final evaluation on the untouched Test period (2022–2025).
@@ -101,12 +95,7 @@ time-series-momentum-research/
 │   ├── 3A_01_temporal_data.ipynb
 │   ├── 3A_02_data_manipulation.ipynb
 │   ├── 3A_03_validation_debugging.ipynb
-│   ├── 3B_02_data_availability.ipynb
-│   └── 3C_01_signal_construction.ipynb
-│
-├── src/
-│   ├── data.py
-│   └── signals.py
+│   └── 3B_02_data_availability.ipynb
 │
 ├── docs/
 │   ├── 3B_01_research_foundations.md
@@ -147,7 +136,7 @@ python -m pip install -r requirements.txt
 
 ## Research Limitations
 
-This project has completed its research design phase and its first empirical signal-construction session (3C.01). The prepared 12-month signals and forward-direction targets have not yet undergone predictive evaluation.
+This project has completed its research design phase and is preparing to begin empirical predictive signal analysis.
 
 No statistically robust predictive relationship or economically exploitable trading strategy has been established.
 
