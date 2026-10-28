@@ -58,7 +58,7 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 |---|---|---|
 | 3A | Python & Research Infrastructure | Completed |
 | 3B | Research Hypotheses & Experimental Protocol | Completed |
-| 3C | Predictive Signal Analysis | In Progress — Session 3C.01 Completed |
+| 3C | Predictive Signal Analysis | In Progress — 3C.01 Completed; 3C.02 In Progress |
 | 3D | Strategy Construction | Planned |
 | 3E | Realistic Backtesting | Planned |
 | 3F | Statistical Robustness & Out-of-Sample Evaluation | Planned |
@@ -81,11 +81,12 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 **Phase 3C — Predictive Signal Analysis**
 
 - Session 01: Monthly momentum signal construction, one-month forward returns and directional targets, Train / Validation preparation, temporal alignment, data cleaning, and validation checks.
+- Session 02 (In Progress): Reusable signal and target cleaning function, reconstruction of Train / Validation datasets, directional Accuracy, Balanced Accuracy, Recall, and confusion matrix analysis. Baseline comparisons and final interpretation remain pending.
 
 ### Next Steps
 
 
-- **3C.02 — Predictive Analysis:** Begin by refactoring the signal and target cleaning logic into a reusable function in `src/signals.py`. Then evaluate the 12-month momentum signal using Accuracy, Balanced Accuracy, directional Recall, confusion matrices, and baseline comparisons.
+- **3C.02 — Predictive Analysis (In Progress):** Complete baseline comparisons for the 12-month momentum signal, consolidate Train / Validation findings, interpret predictive limitations, and finalize the research notebook.
 - **3C.03 — Cross-Asset & Lookback Robustness:** Analyze predictive performance across assets and asset classes, and compare the predefined 3-, 6-, and 12-month momentum horizons.
 - **3D — Strategy Construction:** Translate predictive signals into systematic trading rules without accessing Test results.
 - **3E — Realistic Backtesting:** Evaluate strategy performance on Train and Validation, including transaction costs, slippage, turnover, and risk metrics.
@@ -102,7 +103,8 @@ time-series-momentum-research/
 │   ├── 3A_02_data_manipulation.ipynb
 │   ├── 3A_03_validation_debugging.ipynb
 │   ├── 3B_02_data_availability.ipynb
-│   └── 3C_01_signal_construction.ipynb
+│   ├── 3C_01_signal_construction.ipynb
+│   └── 3C_02_predictive_analysis.ipynb
 │
 ├── src/
 │   ├── data.py
@@ -118,7 +120,9 @@ time-series-momentum-research/
 └── .gitignore
 ```
 
-The repository will evolve as the research progresses. Reusable Python functions are progressively separated from research notebooks to improve code organization, reproducibility, and maintainability.
+The repository evolves progressively as the research advances. Research notebooks document the experimental process, while reusable Python functions are maintained in `src/` to improve reproducibility, modularity, and code maintainability.
+
+Session 3C.02 is currently in progress, with predictive classification metrics implemented and baseline comparisons remaining.
 
 ## Research Documentation
 
@@ -147,9 +151,11 @@ python -m pip install -r requirements.txt
 
 ## Research Limitations
 
-Phase 3C.01 has completed the construction and validation of the primary 12-month momentum dataset, with 1,531 valid Train observations and 765 valid Validation observations.
+Phase 3C.01 completed the construction and validation of the primary 12-month momentum dataset, with 1,531 valid Train observations and 765 valid Validation observations.
 
-Predictive performance and statistical robustness have not yet been evaluated. The 16 ETF proxies may introduce structural biases related to fees, currency exposure, credit risk, and futures roll effects.
+Phase 3C.02 is currently evaluating the directional predictive properties of the signal. Preliminary results show an Accuracy of 51.40% on Train and 51.11% on Validation, with Balanced Accuracy of 50.70% and 50.22%, respectively. The signal exhibits higher Recall for positive returns than for negative returns in both periods.
+
+These descriptive results do not establish statistically significant predictive ability. Baseline comparisons, statistical robustness analysis, and economic evaluation remain outstanding.
 
 Future analyses will address temporal dependence, data leakage, overfitting, transaction costs, and model robustness. The Test period (2022–2025) remains untouched until Phase 3F.
 
