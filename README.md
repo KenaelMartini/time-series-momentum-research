@@ -58,7 +58,7 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 |---|---|---|
 | 3A | Python & Research Infrastructure | Completed |
 | 3B | Research Hypotheses & Experimental Protocol | Completed |
-| 3C | Predictive Signal Analysis | In Progress — Sessions 3C.01 and 3C.02 Completed |
+| 3C | Predictive Signal Analysis | In Progress — 3C.01 and 3C.02 Completed; 3C.03 Data Preparation in progress |
 | 3D | Strategy Construction | Planned |
 | 3E | Realistic Backtesting | Planned |
 | 3F | Statistical Robustness & Out-of-Sample Evaluation | Planned |
@@ -80,12 +80,13 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 
 **Phase 3C — Predictive Signal Analysis**
 
-- Session 01: Monthly momentum signal construction, one-month forward returns and directional targets, Train / Validation preparation, temporal alignment, data cleaning, and validation checks.
-- Session 02: Predictive analysis of the 12-month momentum signal across Train and Validation. Reusable signal and target cleaning, Accuracy, Balanced Accuracy, directional Recall, confusion matrices, naive directional baselines, and cross-period performance comparison. Descriptive findings documented; statistical significance and economic profitability remain unestablished.
+- Session 01: Momentum signal construction, forward directional targets, temporal alignment, and data cleaning.
+- Session 02: Predictive performance evaluation, Accuracy, Balanced Accuracy, Recall, confusion matrices, and naive baselines.
+- Session 03 (In Progress): Multi-lookback signal preparation, reusable research pipeline, sample validation, and cross-asset robustness analysis.
 
 ### Next Steps
 
-- **3C.03 — Cross-Asset & Lookback Robustness:** Analyze predictive performance across assets and asset classes, and compare the predefined 3-, 6-, and 12-month momentum horizons.
+- **3C.03 — Cross-Asset & Lookback Robustness (In Progress):** Complete individual ETF predictive analysis, asset-class comparisons, and robustness evaluation across the predefined 3-, 6-, and 12-month lookbacks using the validated research pipeline.
 - **3D — Strategy Construction:** Translate predictive signals into systematic trading rules without accessing Test results.
 - **3E — Realistic Backtesting:** Evaluate strategy performance on Train and Validation, including transaction costs, slippage, turnover, and risk metrics.
 - **3F — Statistical Robustness & Out-of-Sample Evaluation:** Conduct robustness testing and perform the final evaluation on the untouched Test period (2022–2025).
@@ -102,11 +103,13 @@ time-series-momentum-research/
 │   ├── 3A_03_validation_debugging.ipynb
 │   ├── 3B_02_data_availability.ipynb
 │   ├── 3C_01_signal_construction.ipynb
-│   └── 3C_02_predictive_analysis.ipynb
+│   ├── 3C_02_predictive_analysis.ipynb
+│   └── 3C_03_cross_asset_lookback_robustness.ipynb
 │
 ├── src/
 │   ├── data.py
-│   └── signals.py
+│   ├── signals.py
+│   └── research.py
 │
 ├── docs/
 │   ├── 3B_01_research_foundations.md
@@ -118,9 +121,23 @@ time-series-momentum-research/
 └── .gitignore
 ```
 
-The repository evolves progressively as the research advances. Research notebooks document the experimental process, while reusable Python functions are maintained in `src/` to improve reproducibility, modularity, and code maintainability.
+The repository evolves progressively as the research advances. Research notebooks document the experimental process, while reusable Python functions are maintained in `src/` to improve reproducibility, modularity, and maintainability.
 
-Session 3C.02 is currently in progress, with predictive classification metrics implemented and baseline comparisons remaining.
+### Research Infrastructure
+
+- **`data.py`:** Market data downloading, monthly price resampling, and data integrity validation.
+- **`signals.py`:** Momentum calculation, directional signal and target generation, and signal-target cleaning.
+- **`research.py`:** Reusable research sample preparation, including configurable lookbacks, temporal splitting, individual validity masks, and common-sample construction.
+
+### Current Development Status
+
+Phase 3C.03 — Cross-Asset & Lookback Robustness is currently in progress.
+
+The data preparation pipeline has been implemented and validated across Train and Validation. The reusable `prepare_momentum_samples()` function produces consistent research samples for the 3-, 6-, and 12-month lookbacks.
+
+Individual ETF analysis, asset-class comparisons, and lookback robustness evaluation remain to be completed.
+
+The Test period (2022–2025) remains untouched until Phase 3F.
 
 ## Research Documentation
 

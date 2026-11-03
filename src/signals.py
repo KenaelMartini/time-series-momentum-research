@@ -18,3 +18,7 @@ def clean_signals_and_targets(signals, targets):
 
     return signals_clean, targets_clean, mask
 
+def generate_targets(prices, horizon=1):
+    forward_returns = prices.pct_change(periods=horizon).shift(-horizon)
+    targets = np.sign(forward_returns)
+    return targets
