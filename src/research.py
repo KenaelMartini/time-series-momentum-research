@@ -1,5 +1,6 @@
 import yfinance as yf
 import pandas as pd
+import numpy as np 
 
 from src.signals import (calculate_momentum, generate_signals, generate_targets, clean_signals_and_targets)
 
@@ -72,3 +73,71 @@ def prepare_momentum_samples(monthly_prices, start_date, end_date, lookbacks=(3,
         "common_signals" : signals_common_by_lookback,
         "common_targets" : targets_common
     }
+
+def calculate_predictive_metrics(signals, targets):
+    """
+    Calculate directional predictive performance metrics.
+
+    Parameters
+    ----------
+    signals : pd.DataFrame
+        Predicted return directions.
+    targets : pd.DataFrame
+        Realized return directions.
+
+    Returns
+    -------
+    dict
+        Dictionary containing predictive performance metrics.
+    """
+
+    valid_mask = signals.isin([1, -1]) & targets.isin([1, -1])
+    n_observations = valid_mask.sum().sum()
+    n_correct_predictions = ((valid_mask) & (signals == targets)).sum().sum()
+
+    if n_observations > 0:
+        accuracy = n_correct_predictions / n_observations
+    else:
+        accuracy = np.nan
+
+    n_actual_positive = (valid_mask & (targets == 1)).sum().sum()
+    n_true_positive = (valid_mask & ((signals == 1) & (targets == 1))).sum().sum()
+
+    if n_actual_positive > 0:
+        positive_recall = n_true_positive / n_actual_positive
+    else:
+        positive_recall = np.nan
+
+    n_actual_negative = (valid_mask & (targets == -1)).sum().sum()
+    n_true_negative = (valid_mask & ((signals == -1) & (targets == -1))).sum().sum()
+
+    if n_actual_negative > 0:
+        negative_recall = n_true_negative / n_actual_negative
+    else:
+        negative_recall = np.nan
+
+    balanced_accuracy = (positive_recall + negative_recall) / 2
+
+    if n_observations > 0:
+        always_long_accuracy = n_actual_positive / n_observations
+    else:
+        always_long_accuracy = np.nan
+
+    if n_observations > 0:
+        always_short_accuracy = n_actual_negative / n_observations
+    else:
+        always_short_accuracy = np.nan
+
+    excess_accuracy_long = accuracy - always_long_accuracy
+    excess_accuracy_short = accuracy - always_short_accuracy
+        
+    return {"n_observations" : n_observations,
+            "accuracy" : accuracy,
+            "positive_recall" : positive_recall,
+            "negative_recall" : negative_recall,
+            "balanced_accuracy" : balanced_accuracy,
+            "always_long_accuracy" : always_long_accuracy,
+            "always_short_accuracy" : always_short_accuracy,
+            "excess_accuracy_long" : excess_accuracy_long,
+            "excess_accuracy_short" : excess_accuracy_short
+            }
