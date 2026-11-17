@@ -58,7 +58,7 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 |---|---|---|
 | 3A | Python & Research Infrastructure | Completed |
 | 3B | Research Hypotheses & Experimental Protocol | Completed |
-| 3C | Predictive Signal Analysis | In Progress — 3C.01 and 3C.02 Completed; 3C.03 Data Preparation in progress |
+| 3C | Predictive Signal Analysis | In Progress — 3C.03 final review pending |
 | 3D | Strategy Construction | Planned |
 | 3E | Realistic Backtesting | Planned |
 | 3F | Statistical Robustness & Out-of-Sample Evaluation | Planned |
@@ -82,11 +82,11 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 
 - Session 01: Momentum signal construction, forward directional targets, temporal alignment, and data cleaning.
 - Session 02: Predictive performance evaluation, Accuracy, Balanced Accuracy, Recall, confusion matrices, and naive baselines.
-- Session 03 (In Progress): Multi-lookback signal preparation, reusable research pipeline, sample validation, and cross-asset robustness analysis.
+- Session 03 (In Progress): Cross-asset predictive analysis, lookback robustness, and baseline comparisons; final review pending.
 
 ### Next Steps
 
-- **3C.03 — Cross-Asset & Lookback Robustness (In Progress):** Complete individual ETF predictive analysis, asset-class comparisons, and robustness evaluation across the predefined 3-, 6-, and 12-month lookbacks using the validated research pipeline.
+- **3C.03 — Cross-Asset & Lookback Robustness:** Finalize research conclusions and quality checks.
 - **3D — Strategy Construction:** Translate predictive signals into systematic trading rules without accessing Test results.
 - **3E — Realistic Backtesting:** Evaluate strategy performance on Train and Validation, including transaction costs, slippage, turnover, and risk metrics.
 - **3F — Statistical Robustness & Out-of-Sample Evaluation:** Conduct robustness testing and perform the final evaluation on the untouched Test period (2022–2025).
@@ -127,15 +127,15 @@ The repository evolves progressively as the research advances. Research notebook
 
 - **`data.py`:** Market data downloading, monthly price resampling, and data integrity validation.
 - **`signals.py`:** Momentum calculation, directional signal and target generation, and signal-target cleaning.
-- **`research.py`:** Reusable research sample preparation, including configurable lookbacks, temporal splitting, individual validity masks, and common-sample construction.
+- **`research.py`:** Sample preparation, predictive metrics, naive baselines, and robustness analysis.
 
 ### Current Development Status
 
-Phase 3C.03 — Cross-Asset & Lookback Robustness is currently in progress.
+Phase 3C.03 — Cross-Asset & Lookback Robustness is nearing completion.
 
-The data preparation pipeline has been implemented and validated across Train and Validation. The reusable `prepare_momentum_samples()` function produces consistent research samples for the 3-, 6-, and 12-month lookbacks.
+Predictive analysis across 16 ETFs and three lookbacks (3M, 6M, 12M) is complete, including baseline comparisons, Balanced Accuracy, and cross-period consistency.
 
-Individual ETF analysis, asset-class comparisons, and lookback robustness evaluation remain to be completed.
+No ETF consistently outperformed both naive baselines across all lookbacks and periods. Final research conclusions and quality checks remain.
 
 The Test period (2022–2025) remains untouched until Phase 3F.
 
@@ -144,6 +144,7 @@ The Test period (2022–2025) remains untouched until Phase 3F.
 - [Phase 3B.01 — Research Foundations](docs/3B_01_research_foundations.md)
 - [Phase 3B.02 — Experimental Design & Data Availability Audit](docs/3B_02_experimental_design.md)
 - [Phase 3B.03 — Research Protocol Finalization](docs/3B_03_research_protocol.md)
+- [Phase 3C.03 _ found no ETF (0/16) consistently outperforming both baselines across all lookbacks and periods. Statistical significance remains untested.]()
 
 Additional documentation, experimental protocols, research results, and reproducible analyses will be added progressively.
 
