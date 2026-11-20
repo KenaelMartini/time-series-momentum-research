@@ -59,7 +59,7 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 | 3A | Python & Research Infrastructure | Completed |
 | 3B | Research Hypotheses & Experimental Protocol | Completed |
 | 3C | Predictive Signal Analysis | Completed |
-| 3D | Strategy Construction | Planned |
+| 3D | Strategy Construction | In Progress |
 | 3E | Realistic Backtesting | Planned |
 | 3F | Statistical Robustness & Out-of-Sample Evaluation | Planned |
 | 3G | Research Publication | Planned |
@@ -84,9 +84,13 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 - Session 02: Predictive performance evaluation, Accuracy, Balanced Accuracy, Recall, confusion matrices, and naive baselines.
 - Session 03: Cross-asset predictive analysis, lookback robustness, baseline comparisons, and reproducibility validation.
 
+**Phase 3D — Strategy Construction**
+
+- Session 01: Implementation and validation of 12-month TSMOM Long/Short/Flat positions, temporal alignment, position changes, and directional exposure analysis.
+
 ### Next Steps
 
-- **3D — Strategy Construction:** Translate predictive signals into systematic trading rules without accessing Test results.
+- **3D.02 — Portfolio Construction:** Define portfolio weights, capital allocation rules, and gross/net exposure constraints.
 - **3E — Realistic Backtesting:** Evaluate strategy performance on Train and Validation, including transaction costs, slippage, turnover, and risk metrics.
 - **3F — Statistical Robustness & Out-of-Sample Evaluation:** Conduct robustness testing and perform the final evaluation on the untouched Test period (2022–2025).
 - **3G — Research Publication:** Document the methodology, results, limitations, and conclusions in a final research report.
@@ -103,7 +107,8 @@ time-series-momentum-research/
 │   ├── 3B_02_data_availability.ipynb
 │   ├── 3C_01_signal_construction.ipynb
 │   ├── 3C_02_predictive_analysis.ipynb
-│   └── 3C_03_cross_asset_lookback_robustness.ipynb
+│   ├── 3C_03_cross_asset_lookback_robustness.ipynb
+│   └── 3D_01_strategy_rules.ipynb
 │
 ├── src/
 │   ├── data.py
@@ -136,7 +141,17 @@ The analysis evaluated 16 ETFs across three momentum lookbacks (3M, 6M, 12M), us
 
 No ETF (0/16) consistently outperformed both naive baselines across all lookbacks and periods. These descriptive findings do not establish statistically significant predictive ability.
 
-The project now advances to Phase 3D — Strategy Construction. The Test period (2022–2025) remains untouched until Phase 3F.
+Phase 3D.01 — Strategy Rules & Position Construction has been completed and validated.
+
+The 12-month TSMOM strategy was translated into systematic Long/Short/Flat positions across 16 ETFs, with a one-month lag to ensure temporal alignment.
+
+The analysis identified 536 cumulative units of absolute position changes, excluding initial entries. All complete months passed the 16-asset exposure consistency check.
+
+These results validate the position construction methodology, not the economic performance of the strategy.
+
+**Current focus: Phase 3D.02 — Portfolio Construction.**
+
+The Test period (2022–2025) remains untouched until Phase 3F.
 
 ## Research Documentation
 
