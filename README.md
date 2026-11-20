@@ -59,7 +59,7 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 | 3A | Python & Research Infrastructure | Completed |
 | 3B | Research Hypotheses & Experimental Protocol | Completed |
 | 3C | Predictive Signal Analysis | Completed |
-| 3D | Strategy Construction | In Progress |
+| 3D | Strategy Construction | Planned |
 | 3E | Realistic Backtesting | Planned |
 | 3F | Statistical Robustness & Out-of-Sample Evaluation | Planned |
 | 3G | Research Publication | Planned |
@@ -84,13 +84,9 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 - Session 02: Predictive performance evaluation, Accuracy, Balanced Accuracy, Recall, confusion matrices, and naive baselines.
 - Session 03: Cross-asset predictive analysis, lookback robustness, baseline comparisons, and reproducibility validation.
 
-**Phase 3D — Strategy Construction**
-
-- Session 01: 12-month TSMOM Long/Short/Flat rules, one-month position lag, missing-value handling, position-change measurement, and exposure consistency checks. Completed (notebook pending repository upload).
-
 ### Next Steps
 
-- **3D.02 — Portfolio Construction:** Define portfolio weights, capital allocation, and gross/net exposure constraints before portfolio-level validation.
+- **3D — Strategy Construction:** Translate predictive signals into systematic trading rules without accessing Test results.
 - **3E — Realistic Backtesting:** Evaluate strategy performance on Train and Validation, including transaction costs, slippage, turnover, and risk metrics.
 - **3F — Statistical Robustness & Out-of-Sample Evaluation:** Conduct robustness testing and perform the final evaluation on the untouched Test period (2022–2025).
 - **3G — Research Publication:** Document the methodology, results, limitations, and conclusions in a final research report.
@@ -140,9 +136,7 @@ The analysis evaluated 16 ETFs across three momentum lookbacks (3M, 6M, 12M), us
 
 No ETF (0/16) consistently outperformed both naive baselines across all lookbacks and periods. These descriptive findings do not establish statistically significant predictive ability.
 
-Phase 3D.01 — Strategy Rules & Position Construction has been completed. Using monthly data from January 2008 to December 2021, the study generated 12-month momentum signals and lagged Long/Short/Flat positions for 16 ETFs, preserving initial undefined observations. The preliminary position-change measure totals 536 absolute position units (excluding initial entries). All complete months passed the 16-asset exposure consistency check.
-
-The project is now in **Phase 3D.02 — Portfolio Construction**. Portfolio weights, realized returns, transaction costs, and economic performance remain unevaluated. The 3D.01 notebook is pending upload to the repository. The Test period (2022–2025) remains untouched until Phase 3F.
+The project now advances to Phase 3D — Strategy Construction. The Test period (2022–2025) remains untouched until Phase 3F.
 
 ## Research Documentation
 
@@ -177,7 +171,7 @@ Accuracy reached 51.40% on Train and 51.11% on Validation, while Balanced Accura
 
 Phase 3C.03 extended the analysis across 16 ETFs and three lookbacks (3M, 6M, 12M). All lookbacks underperformed Always Long in global Accuracy on both periods, and no ETF (0/16) consistently outperformed both naive baselines across all lookbacks and periods.
 
-These findings do not establish statistically significant predictive ability or economic profitability. Phase 3D.01 validates position-construction logic and exposure consistency only; portfolio allocation and economic backtesting remain outstanding. Further research will address statistical inference, temporal dependence, ETF-specific biases, and realistic implementation costs.
+These findings do not establish statistically significant predictive ability or economic profitability. Further research will address statistical inference, temporal dependence, ETF-specific biases, and realistic implementation costs.
 
 The Test period (2022–2025) remains untouched until Phase 3F.
 
