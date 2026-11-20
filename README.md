@@ -58,7 +58,7 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 |---|---|---|
 | 3A | Python & Research Infrastructure | Completed |
 | 3B | Research Hypotheses & Experimental Protocol | Completed |
-| 3C | Predictive Signal Analysis | In Progress — 3C.03 final review pending |
+| 3C | Predictive Signal Analysis | Completed |
 | 3D | Strategy Construction | Planned |
 | 3E | Realistic Backtesting | Planned |
 | 3F | Statistical Robustness & Out-of-Sample Evaluation | Planned |
@@ -82,11 +82,10 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 
 - Session 01: Momentum signal construction, forward directional targets, temporal alignment, and data cleaning.
 - Session 02: Predictive performance evaluation, Accuracy, Balanced Accuracy, Recall, confusion matrices, and naive baselines.
-- Session 03 (In Progress): Cross-asset predictive analysis, lookback robustness, and baseline comparisons; final review pending.
+- Session 03: Cross-asset predictive analysis, lookback robustness, baseline comparisons, and reproducibility validation.
 
 ### Next Steps
 
-- **3C.03 — Cross-Asset & Lookback Robustness:** Finalize research conclusions and quality checks.
 - **3D — Strategy Construction:** Translate predictive signals into systematic trading rules without accessing Test results.
 - **3E — Realistic Backtesting:** Evaluate strategy performance on Train and Validation, including transaction costs, slippage, turnover, and risk metrics.
 - **3F — Statistical Robustness & Out-of-Sample Evaluation:** Conduct robustness testing and perform the final evaluation on the untouched Test period (2022–2025).
@@ -131,20 +130,19 @@ The repository evolves progressively as the research advances. Research notebook
 
 ### Current Development Status
 
-Phase 3C.03 — Cross-Asset & Lookback Robustness is nearing completion.
+Phase 3C — Predictive Signal Analysis has been completed, including all three research sessions and final quality assurance.
 
-Predictive analysis across 16 ETFs and three lookbacks (3M, 6M, 12M) is complete, including baseline comparisons, Balanced Accuracy, and cross-period consistency.
+The analysis evaluated 16 ETFs across three momentum lookbacks (3M, 6M, 12M), using Accuracy, Balanced Accuracy, naive baselines, and cross-period robustness assessments.
 
-No ETF consistently outperformed both naive baselines across all lookbacks and periods. Final research conclusions and quality checks remain.
+No ETF (0/16) consistently outperformed both naive baselines across all lookbacks and periods. These descriptive findings do not establish statistically significant predictive ability.
 
-The Test period (2022–2025) remains untouched until Phase 3F.
+The project now advances to Phase 3D — Strategy Construction. The Test period (2022–2025) remains untouched until Phase 3F.
 
 ## Research Documentation
 
 - [Phase 3B.01 — Research Foundations](docs/3B_01_research_foundations.md)
 - [Phase 3B.02 — Experimental Design & Data Availability Audit](docs/3B_02_experimental_design.md)
 - [Phase 3B.03 — Research Protocol Finalization](docs/3B_03_research_protocol.md)
-- [Phase 3C.03 _ found no ETF (0/16) consistently outperforming both baselines across all lookbacks and periods. Statistical significance remains untested.]()
 
 Additional documentation, experimental protocols, research results, and reproducible analyses will be added progressively.
 
@@ -171,7 +169,9 @@ Phase 3C.02 completed the preliminary predictive analysis of the 12-month moment
 
 Accuracy reached 51.40% on Train and 51.11% on Validation, while Balanced Accuracy remained close to 50% (50.70% and 50.22%). The Always Long baseline outperformed momentum in conventional Accuracy on both periods.
 
-These results do not establish statistically significant predictive ability or economic profitability. Further research will address cross-asset robustness, lookback sensitivity, temporal dependence, ETF-specific biases, and transaction costs.
+Phase 3C.03 extended the analysis across 16 ETFs and three lookbacks (3M, 6M, 12M). All lookbacks underperformed Always Long in global Accuracy on both periods, and no ETF (0/16) consistently outperformed both naive baselines across all lookbacks and periods.
+
+These findings do not establish statistically significant predictive ability or economic profitability. Further research will address statistical inference, temporal dependence, ETF-specific biases, and realistic implementation costs.
 
 The Test period (2022–2025) remains untouched until Phase 3F.
 
