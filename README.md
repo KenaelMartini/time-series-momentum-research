@@ -89,9 +89,13 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 - Session 01: Implementation and validation of 12-month TSMOM Long/Short/Flat positions, temporal alignment, position changes, and directional exposure analysis.
 - Session 02: Equal Notional Weighting across 16 ETFs, monthly target portfolio weights, gross/net exposure calculations, and validation of portfolio exposure constraints.
 
+**Phase 3E — Realistic Backtesting**
+
+- Session 01: Monthly asset returns, gross portfolio return calculation, temporal alignment validation, and visual analysis of portfolio returns and exposures.
+
 ### Next Steps
 
-- **3E — Realistic Backtesting:** Evaluate strategy performance on Train and Validation, including transaction costs, slippage, turnover, and risk metrics.
+- **3E.02 — Performance & Risk Analysis:** Evaluate cumulative returns, benchmark performance, Sharpe Ratio, annualized volatility, and drawdowns across Train and Validation.
 - **3F — Statistical Robustness & Out-of-Sample Evaluation:** Conduct robustness testing and perform the final evaluation on the untouched Test period (2022–2025).
 - **3G — Research Publication:** Document the methodology, results, limitations, and conclusions in a final research report.
 
@@ -109,13 +113,17 @@ time-series-momentum-research/
 │   ├── 3C_02_predictive_analysis.ipynb
 │   ├── 3C_03_cross_asset_lookback_robustness.ipynb
 │   ├── 3D_01_strategy_rules.ipynb
-│   └── 3D_02_portfolio_construction.ipynb
+│   ├── 3D_02_portfolio_construction.ipynb
+│   └── 3E_01_portfolio_returns.ipynb
 │
 ├── src/
+│   ├── __init__.py
 │   ├── data.py
 │   ├── signals.py
 │   ├── research.py
-│   └── strategy.py
+│   ├── strategy.py
+│   ├── metrics.py
+│   └── utils.py
 │
 ├── docs/
 │   ├── 3B_01_research_foundations.md
@@ -134,19 +142,24 @@ The repository evolves progressively as the research advances. Research notebook
 - **`data.py`:** Market data downloading, monthly price resampling, data integrity validation, and reusable monthly price preparation.
 - **`signals.py`:** Momentum calculation, directional signal and target generation, and signal-target cleaning.
 - **`research.py`:** Sample preparation, predictive metrics, naive baselines, and robustness analysis.
-- **`strategy.py`:** TSMOM signal and position construction, Equal Notional portfolio weighting, and gross/net exposure calculations.
+- **`strategy.py`:** TSMOM position construction, Equal Notional portfolio weighting, gross/net exposure calculations, and reusable monthly gross portfolio return calculations.
 
 ### Current Development Status
 
 **Phase 3D — Strategy Construction: Completed and validated.**
 
-- **3D.01:** Implemented 12-month TSMOM Long/Short/Flat positions with a one-month lag to prevent look-ahead bias.
-- **3D.02:** Implemented Equal Notional Weighting across 16 ETFs (6.25% per asset) and validated gross/net exposure constraints.
-- Developed reusable functions for data preparation, position construction, portfolio weighting, and exposure calculations in `src/`.
+**Phase 3E — Realistic Backtesting: In Progress.**
 
-**Current focus: Phase 3E — Realistic Backtesting.**
+- **3E.01:** Implemented monthly asset and gross portfolio return calculations using lagged Equal Notional weights across 16 ETFs.
+- Validated temporal alignment, return aggregation, and data completeness across Train and Validation.
+- Developed a reusable portfolio return calculation function in `src/strategy.py`.
+- Introduced visual analysis of monthly gross returns and gross/net portfolio exposures.
 
-Next steps include portfolio return calculations, Train/Validation performance evaluation, turnover, transaction costs, slippage, and risk metrics.
+**Current focus: Phase 3E.02 — Performance & Risk Analysis.**
+
+Next steps include cumulative performance, benchmark comparisons, annualized risk metrics, Sharpe Ratio, and drawdown analysis.
+
+Transaction costs, slippage, and turnover will be incorporated in subsequent Phase 3E sessions.
 
 The Test period (2022–2025) remains untouched until Phase 3F.
 
@@ -180,6 +193,8 @@ python -m pip install -r requirements.txt
 Phase 3C found limited evidence of directional predictive ability. Across 16 ETFs and three momentum lookbacks (3M, 6M, 12M), no ETF consistently outperformed both naive baselines across all periods and specifications.
 
 Phase 3D established systematic trading positions and Equal Notional portfolio weights. However, successful position and exposure validation does not establish economic profitability.
+
+Phase 3E.01 implemented gross portfolio returns and preliminary visual analysis. However, these returns exclude transaction costs, slippage, financing costs, and other implementation frictions. Risk-adjusted performance and benchmark comparisons remain to be evaluated.
 
 Key limitations include:
 
