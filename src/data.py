@@ -25,3 +25,11 @@ def validate_monthly_prices(monthly_prices, tickers, start_date, end_date):
     expected_dates = pd.date_range(start=start_date, end=end_date, freq="ME")
     if not monthly_prices.index.equals(expected_dates):
         raise ValueError("Monthly prices do not cover the entire date range with expected monthly frequency")
+
+def prepare_monthly_prices(tickers, start_date, end_date):
+    prices = download_prices(tickers, start_date, end_date, auto_adjust=True, progress=False)
+    monthly_prices = to_monthly_prices(prices)
+    validate_monthly_prices(monthly_prices, tickers, start_date, end_date)
+
+    return monthly_prices
+
