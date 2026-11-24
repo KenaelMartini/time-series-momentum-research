@@ -92,6 +92,7 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 **Phase 3E — Realistic Backtesting**
 
 - Session 01: Monthly asset returns, gross portfolio return calculation, temporal alignment validation, and visual analysis of portfolio returns and exposures.
+- Session 02 (In Progress): Gross performance evaluation, Equal-Weighted Long-Only benchmark comparison, CAGR, annualized volatility, Sharpe Ratio, Maximum Drawdown, and comparative visualizations.
 
 ### Next Steps
 
@@ -114,7 +115,8 @@ time-series-momentum-research/
 │   ├── 3C_03_cross_asset_lookback_robustness.ipynb
 │   ├── 3D_01_strategy_rules.ipynb
 │   ├── 3D_02_portfolio_construction.ipynb
-│   └── 3E_01_portfolio_returns.ipynb
+│   ├── 3E_01_portfolio_returns.ipynb
+│   └── 3E_02_performance_analysis.ipynb
 │
 ├── src/
 │   ├── __init__.py
@@ -150,16 +152,14 @@ The repository evolves progressively as the research advances. Research notebook
 
 **Phase 3E — Realistic Backtesting: In Progress.**
 
-- **3E.01:** Implemented monthly asset and gross portfolio return calculations using lagged Equal Notional weights across 16 ETFs.
-- Validated temporal alignment, return aggregation, and data completeness across Train and Validation.
-- Developed a reusable portfolio return calculation function in `src/strategy.py`.
-- Introduced visual analysis of monthly gross returns and gross/net portfolio exposures.
+- **3E.01:** Completed and validated monthly gross portfolio returns, temporal alignment, and exposure visualizations.
+- **3E.02:** Implemented Train/Validation performance analysis against an Equal-Weighted Long-Only benchmark.
+- Calculated CAGR, annualized volatility, Sharpe Ratio, and Maximum Drawdown.
+- Developed comparative equity curves, drawdown charts, performance tables, and metric visualizations.
 
-**Current focus: Phase 3E.02 — Performance & Risk Analysis.**
+**Current focus: Finalizing Phase 3E.02**, including reusable performance metrics and notebook validation.
 
-Next steps include cumulative performance, benchmark comparisons, annualized risk metrics, Sharpe Ratio, and drawdown analysis.
-
-Transaction costs, slippage, and turnover will be incorporated in subsequent Phase 3E sessions.
+Transaction costs, slippage, and turnover will be addressed in subsequent sessions.
 
 The Test period (2022–2025) remains untouched until Phase 3F.
 
