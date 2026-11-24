@@ -92,11 +92,11 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 **Phase 3E — Realistic Backtesting**
 
 - Session 01: Monthly asset returns, gross portfolio return calculation, temporal alignment validation, and visual analysis of portfolio returns and exposures.
-- Session 02 (In Progress): Gross performance evaluation, Equal-Weighted Long-Only benchmark comparison, CAGR, annualized volatility, Sharpe Ratio, Maximum Drawdown, and comparative visualizations.
+- Session 02: Completed and validated Train/Validation performance analysis, Equal-Weighted Long-Only benchmark comparison, CAGR, annualized volatility, Sharpe Ratio, Maximum Drawdown, comparative visualizations, and reusable performance metrics with numerical consistency verification.
 
 ### Next Steps
 
-- **3E.02 — Performance & Risk Analysis:** Evaluate cumulative returns, benchmark performance, Sharpe Ratio, annualized volatility, and drawdowns across Train and Validation.
+- **3E.03 — Transaction Costs, Turnover & Net Performance:** Implement portfolio turnover calculations, transaction cost modeling, and net performance evaluation across Train and Validation.
 - **3F — Statistical Robustness & Out-of-Sample Evaluation:** Conduct robustness testing and perform the final evaluation on the untouched Test period (2022–2025).
 - **3G — Research Publication:** Document the methodology, results, limitations, and conclusions in a final research report.
 
@@ -145,6 +145,7 @@ The repository evolves progressively as the research advances. Research notebook
 - **`signals.py`:** Momentum calculation, directional signal and target generation, and signal-target cleaning.
 - **`research.py`:** Sample preparation, predictive metrics, naive baselines, and robustness analysis.
 - **`strategy.py`:** TSMOM position construction, Equal Notional portfolio weighting, gross/net exposure calculations, and reusable monthly gross portfolio return calculations.
+- **`metrics.py`:** Reusable portfolio performance and risk metrics, including CAGR, annualized volatility, Sharpe Ratio, and Maximum Drawdown.
 
 ### Current Development Status
 
@@ -152,14 +153,16 @@ The repository evolves progressively as the research advances. Research notebook
 
 **Phase 3E — Realistic Backtesting: In Progress.**
 
-- **3E.01:** Completed and validated monthly gross portfolio returns, temporal alignment, and exposure visualizations.
-- **3E.02:** Implemented Train/Validation performance analysis against an Equal-Weighted Long-Only benchmark.
-- Calculated CAGR, annualized volatility, Sharpe Ratio, and Maximum Drawdown.
+- **3E.01 (Completed):** Monthly gross portfolio returns, temporal alignment validation, and exposure visualizations.
+- **3E.02 (Completed):** Train/Validation performance and risk analysis against an Equal-Weighted Long-Only benchmark.
+- Implemented CAGR, annualized volatility, Sharpe Ratio, and Maximum Drawdown calculations.
 - Developed comparative equity curves, drawdown charts, performance tables, and metric visualizations.
+- Created the reusable `calculate_performance_metrics()` function in `src/metrics.py`.
+- Verified numerical consistency between the original calculations and the reusable function using `DataFrame.equals()`.
 
-**Current focus: Finalizing Phase 3E.02**, including reusable performance metrics and notebook validation.
+**Current focus: Phase 3E.03 — Transaction Costs, Turnover & Net Performance.**
 
-Transaction costs, slippage, and turnover will be addressed in subsequent sessions.
+Transaction costs, slippage, and financing costs have not yet been incorporated into strategy returns.
 
 The Test period (2022–2025) remains untouched until Phase 3F.
 
@@ -194,7 +197,13 @@ Phase 3C found limited evidence of directional predictive ability. Across 16 ETF
 
 Phase 3D established systematic trading positions and Equal Notional portfolio weights. However, successful position and exposure validation does not establish economic profitability.
 
-Phase 3E.01 implemented gross portfolio returns and preliminary visual analysis. However, these returns exclude transaction costs, slippage, financing costs, and other implementation frictions. Risk-adjusted performance and benchmark comparisons remain to be evaluated.
+Phase 3E.01 implemented and validated monthly gross portfolio returns.
+
+Phase 3E.02 evaluated TSMOM performance against an Equal-Weighted Long-Only benchmark across Train (2010–2017) and Validation (2018–2021).
+
+TSMOM exhibited lower CAGR and Sharpe Ratios than the benchmark in both periods, alongside lower annualized volatility and smaller maximum drawdowns.
+
+These findings do not establish economic profitability or statistical significance. The analysis remains based on gross returns and excludes transaction costs, slippage, financing costs, and other implementation frictions.
 
 Key limitations include:
 
