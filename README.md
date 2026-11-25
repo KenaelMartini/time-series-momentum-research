@@ -96,7 +96,7 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 
 ### Next Steps
 
-- **3E.03 — Transaction Costs, Turnover & Net Performance:** Implement portfolio turnover calculations, transaction cost modeling, and net performance evaluation across Train and Validation.
+- **3E.03 — Transaction Costs, Turnover & Net Performance (In Progress):** Complete actual portfolio turnover calculations, transaction cost modeling, and net performance evaluation across Train and Validation.
 - **3F — Statistical Robustness & Out-of-Sample Evaluation:** Conduct robustness testing and perform the final evaluation on the untouched Test period (2022–2025).
 - **3G — Research Publication:** Document the methodology, results, limitations, and conclusions in a final research report.
 
@@ -116,7 +116,8 @@ time-series-momentum-research/
 │   ├── 3D_01_strategy_rules.ipynb
 │   ├── 3D_02_portfolio_construction.ipynb
 │   ├── 3E_01_portfolio_returns.ipynb
-│   └── 3E_02_performance_analysis.ipynb
+│   ├── 3E_02_performance_analysis.ipynb
+│   └── 3E_03_transaction_costs.ipynb
 │
 ├── src/
 │   ├── __init__.py
@@ -162,7 +163,12 @@ The repository evolves progressively as the research advances. Research notebook
 
 **Current focus: Phase 3E.03 — Transaction Costs, Turnover & Net Performance.**
 
-Transaction costs, slippage, and financing costs have not yet been incorporated into strategy returns.
+- **3E.03 (In Progress):**
+  - Reconstructed the TSMOM portfolio and benchmark.
+  - Implemented signal-driven turnover calculations.
+  - Measured average monthly turnover (21.96%) and annualized turnover (263.54%).
+  - Implemented pre-rebalancing weight drift calculations.
+  - Actual portfolio turnover and transaction cost modeling remain pending.
 
 The Test period (2022–2025) remains untouched until Phase 3F.
 
@@ -210,7 +216,7 @@ Key limitations include:
 - **Statistical inference:** Predictive results have not yet established statistical significance.
 - **ETF proxies:** Returns may be affected by management fees, tracking differences, currency exposure, credit risk, and futures roll effects.
 - **Portfolio construction:** Equal Notional Weighting does not account for differences in asset volatility, correlations, or risk contributions.
-- **Trading frictions:** Transaction costs, slippage, financing costs, short-selling constraints, and realized portfolio turnover have not yet been modeled.
+- **Trading frictions:** Signal-driven turnover and weight drift have been quantified. Actual portfolio turnover, transaction costs, slippage, financing costs, and short-selling constraints have not yet been fully modeled.
 - **Selection and model risk:** Survivorship bias, data snooping, and overfitting remain relevant methodological risks.
 
 Phase 3E will evaluate economic performance and realistic trading frictions on Train and Validation.
