@@ -1,87 +1,74 @@
-
 # Phase 3B.02 — Experimental Design & Data Availability Audit
 
 ## 1. Research Objective
 
 **Project:** Robustness of Time-Series Momentum Across Asset Classes
 
-L'objectif de cette séance est de **sélectionner notre univers de recherche**, de définir la source et la période des données, puis de vérifier leur disponibilité avant l'analyse des signaux.
-
-Nous cherchons à construire un cadre expérimental rigoureux, sans présupposer que le Time-Series Momentum fonctionne.
+Select the research universe, define the data source and period, and verify availability before signal analysis. Establish a rigorous experimental framework without presupposing that TSMOM works.
 
 ## 2. Research Universe
 
-Nous avons retenu **16 ETF répartis équitablement entre quatre classes d'actifs** :
+The universe comprises **16 ETFs equally distributed across four asset classes**:
 
-| Classe | Instruments | Expositions |
+| Class | Instruments | Exposures |
 |---|---|---|
-| Equities | SPY, VGK, EWJ, EEM | États-Unis, Europe, Japon, marchés émergents |
-| Commodities | USO, DBA, DBB, DBC | Énergie, agriculture, métaux industriels, panier diversifié |
-| Bonds | IEF, TLT, LQD, HYG | Treasuries, crédit Investment Grade et High Yield |
-| Forex | FXE, FXY, FXB, FXA | EUR, JPY, GBP et AUD contre USD |
+| Equities | SPY, VGK, EWJ, EEM | United States, Europe, Japan, emerging markets |
+| Commodities | USO, DBA, DBB, DBC | Energy, agriculture, industrial metals, diversified basket |
+| Bonds | IEF, TLT, LQD, HYG | Treasuries, investment-grade and high-yield credit |
+| Forex | FXE, FXY, FXB, FXA | EUR, JPY, GBP and AUD against USD |
 
-**Principaux arbitrages :**
+**Key trade-offs:**
 
-- **Commodities :** privilégier des ETF exposés aux futures plutôt qu'un mélange de fonds physiques et de fonds sur futures. Les mécanismes de *roll* restent différents ; DBC recoupe certaines expositions.
-- **Bonds :** étudier les taux souverains et le risque de crédit, plutôt que quatre ETF de Treasuries similaires.
-- **Forex :** reconnaître que les quatre devises partagent une exposition au dollar, ce qui limite leur indépendance.
-- **Equities :** les ETF sont cotés en USD ; leurs rendements internationaux peuvent intégrer un effet de change.
+- Commodities: prefer futures-exposed ETFs to a mix of physical and futures funds. Roll mechanisms differ, and DBC overlaps some exposures.
+- Bonds: study sovereign rates and credit risk rather than four similar Treasury ETFs.
+- Forex: recognize the common USD exposure, which limits independence.
+- Equities: USD-listed international ETFs may incorporate currency effects.
 
-Si un ETF présente un historique insuffisant, nous chercherons **un remplaçant économiquement comparable**, sans sélectionner les instruments selon les résultats du momentum.
+If an ETF lacks adequate history, seek an economically comparable replacement without selecting instruments based on momentum results.
 
 ## 3. Data Source & Sample Period
 
-- **Source :** Yahoo Finance via `yfinance`. L'accès FactSet Formula étudié précédemment n'était pas autorisé par les droits disponibles.
-- **Prix :** clôtures ajustées avec `auto_adjust=True`, pour des ETF cotés en USD.
-- **Fréquence :** données quotidiennes, agrégées en prix de fin de mois avec `.resample("ME").last()`.
-- **Période d'évaluation :** janvier 2010 à décembre 2025.
-- **Historique préalable :** téléchargement depuis janvier 2008 pour disposer des prix nécessaires aux premiers rendements passés sur 12 mois.
+- **Source:** Yahoo Finance via `yfinance`. The previously explored FactSet Formula access was not authorized under the available permissions.
+- **Prices:** adjusted closes with `auto_adjust=True`, for USD-listed ETFs.
+- **Frequency:** daily observations aggregated to month-end with `.resample("ME").last()`.
+- **Evaluation:** January 2010–December 2025.
+- **Warm-up:** download from January 2008 to support initial 12-month returns.
 
-Les résultats concerneront les **rendements de ces ETF**, et non directement ceux des indices, des cours *spot* ou de contrats futures institutionnels.
+Results relate to ETF returns, not directly to underlying indices, spot prices or institutional futures contracts.
 
 ## 4. Data Availability Audit
 
-Nous avons vérifié les valeurs manquantes, l'ordre des dates, les doublons et les prix non positifs.
+Check missing values, chronological order, duplicates and nonpositive prices.
 
-- **2010–2025 :** 4 024 dates × 16 ETF ; aucune valeur manquante.
-- **2009–2025 :** 4 276 dates × 16 ETF ; aucune valeur manquante, aucun doublon et aucun prix non positif ; dates ordonnées.
-- **Extension à 2008 :** première observation mensuelle confirmée au 31 janvier 2008 ; contrôles complets de 2008–2025 encore à consigner.
+- 2010–2025: 4,024 dates × 16 ETFs, no missing values.
+- 2009–2025: 4,276 dates × 16 ETFs, no missing values, duplicates or nonpositive prices; dates sorted.
+- Extension to 2008: first monthly observation confirmed on January 31, 2008; complete 2008–2025 checks remain to be documented.
 
-**Conclusion provisoire :** les 16 ETF disposent d'un historique exploitable sur 2009–2025. Aucune substitution n'est nécessaire à ce stade. L'absence d'anomalies structurelles ne garantit toutefois pas la qualité économique des séries.
+**Provisional conclusion:** all 16 ETFs have usable 2009–2025 history; no substitution is currently required. Structural checks do not guarantee economic data quality.
 
-## 5. Python — Notions travaillées
+## 5. Python — Topics Covered
 
-Cette séance a permis de réviser :
+- Dictionaries of lists, key access and `.values()`.
+- `.append()` versus `.extend()` for ticker lists.
+- Python functions and passing parameters to `yf.download()`.
+- Pandas checks: `.isna().sum()`, `.index.duplicated().sum()`, `.index.is_monotonic_increasing`, vectorized conditions and `.shape`.
+- Monthly resampling with `.resample("ME").last()`.
 
-- Les dictionnaires de listes, l'accès par clé et la méthode `.values()`.
-- La différence entre `.append()` et `.extend()` pour construire la liste des tickers.
-- Les fonctions Python et la transmission effective des paramètres à `yf.download()`.
-- Les contrôles pandas : `.isna().sum()`, `.index.duplicated().sum()`, `.index.is_monotonic_increasing`, conditions vectorisées et `.shape`.
-- Le *resampling* mensuel avec `.resample("ME").last()`.
+**Errors identified:** confusion between lists and dictionaries, incorrect Forex tickers, misspelled `Commodities` key, nested list from `.append()`, and hard-coded values instead of declared function parameters.
 
-**Erreurs identifiées :** confusion initiale entre liste et dictionnaire, tickers Forex incorrects, clé `Commodities` mal orthographiée, liste imbriquée avec `.append()` et paramètres déclarés mais codés en dur dans la fonction.
-
-Un rendement passé sur 12 mois a été calculé à titre exploratoire. Cela ne constitue **pas encore une analyse du signal**, qui appartient à la Phase 3C.
+A 12-month past return was calculated for exploration only, not as formal Phase 3C signal analysis.
 
 ## 6. Methodological Considerations
 
-Les limites identifiées sont notamment :
+- **Common factors:** ETF correlations and shared USD factor for Forex.
+- **Instrument structure:** fees, adjustments and commodity-futures roll effects.
+- **Selection and survivorship bias:** currently available funds; document replacement criteria.
+- **Look-ahead bias:** use only historical data for signal construction.
 
-- **Common Factors :** corrélations entre ETF et facteur USD commun aux instruments Forex.
-- **Instrument Structure :** frais, ajustements et mécanismes de *roll* des ETF sur matières premières.
-- **Selection & Survivorship Bias :** univers composé de fonds actuellement disponibles ; critères de remplacement à documenter.
-- **Look-ahead Bias :** utiliser exclusivement des données passées pour construire le signal.
-
-Le protocole issu de 3B.01 reste provisoire : **momentum 12 mois**, alternatives **3 et 6 mois**, prédiction du **mois suivant**, **Balanced Accuracy** et séparation **Train / Validation / Test**.
+The Phase 3B.01 protocol remains provisional: 12-month momentum, 3- and 6-month alternatives, next-month prediction, Balanced Accuracy and chronological Train / Validation / Test separation.
 
 ## 7. Next Steps & Session Conclusion
 
-Une **séance 3B.03** est nécessaire pour :
+Phase 3B.03 must complete the 2008–2025 data checks, set sample boundaries and parameter selection rules, and specify metrics, baselines and robustness tests before empirical analysis.
 
-- Terminer les contrôles de données sur **2008–2025**.
-- Fixer les frontières Train / Validation / Test et les règles de sélection des paramètres.
-- Préciser les métriques, les *baselines* et les tests de robustesse avant l'analyse empirique.
-
-**Séance 3B.02 terminée :** univers de 16 ETF sélectionné et contrôles structurels satisfaisants sur 2009–2025. Les notions de Python et de validation des données ont été consolidées.
-
-**La Phase 3B reste en cours.** Aucune conclusion concernant le pouvoir prédictif du Time-Series Momentum n'a encore été établie.
+**Session 3B.02 completed:** 16 ETFs selected and satisfactory structural checks for 2009–2025. Python and data validation skills consolidated. Phase 3B remains in progress; no conclusion regarding TSMOM predictive power has been established.
