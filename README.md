@@ -93,10 +93,11 @@ The primary lookback is fixed at 12 months, with 3- and 6-month horizons used fo
 
 - Session 01: Monthly asset returns, gross portfolio return calculation, temporal alignment validation, and visual analysis of portfolio returns and exposures.
 - Session 02: Completed and validated Train/Validation performance analysis, Equal-Weighted Long-Only benchmark comparison, CAGR, annualized volatility, Sharpe Ratio, Maximum Drawdown, comparative visualizations, and reusable performance metrics with numerical consistency verification.
+- Session 03: Signal-driven and drift-adjusted portfolio turnover, transaction cost modeling, gross and net performance comparison, cost sensitivity analysis, and reusable break-even cost estimation.
 
 ### Next Steps
 
-- **3E.03 — Transaction Costs, Turnover & Net Performance (In Progress):** Complete actual portfolio turnover calculations, transaction cost modeling, and net performance evaluation across Train and Validation.
+- **3E.04 — Net Performance Validation & Risk Dashboard:** Analyze trading activity, rolling performance and risk metrics, return heatmaps, and validate the final backtest across Train and Validation.
 - **3F — Statistical Robustness & Out-of-Sample Evaluation:** Conduct robustness testing and perform the final evaluation on the untouched Test period (2022–2025).
 - **3G — Research Publication:** Document the methodology, results, limitations, and conclusions in a final research report.
 
@@ -146,7 +147,7 @@ The repository evolves progressively as the research advances. Research notebook
 - **`signals.py`:** Momentum calculation, directional signal and target generation, and signal-target cleaning.
 - **`research.py`:** Sample preparation, predictive metrics, naive baselines, and robustness analysis.
 - **`strategy.py`:** TSMOM position construction, Equal Notional portfolio weighting, gross/net exposure calculations, and reusable monthly gross portfolio return calculations.
-- **`metrics.py`:** Reusable portfolio performance and risk metrics, including CAGR, annualized volatility, Sharpe Ratio, and Maximum Drawdown.
+- **`metrics.py`:** Reusable portfolio performance and risk metrics, including CAGR, annualized volatility, Sharpe Ratio, Maximum Drawdown, and break-even transaction cost estimation.
 
 ### Current Development Status
 
@@ -161,14 +162,14 @@ The repository evolves progressively as the research advances. Research notebook
 - Created the reusable `calculate_performance_metrics()` function in `src/metrics.py`.
 - Verified numerical consistency between the original calculations and the reusable function using `DataFrame.equals()`.
 
-**Current focus: Phase 3E.03 — Transaction Costs, Turnover & Net Performance.**
+- **3E.03 (Completed):**
+  - Implemented signal-driven and drift-adjusted portfolio turnover.
+  - Modeled proportional transaction costs and net portfolio returns.
+  - Evaluated cost sensitivity across five scenarios (0–50 bps).
+  - Estimated break-even costs of 24.04 bps (Train) and 11.48 bps (Validation).
+  - Created and validated the reusable `calculate_break_even_cost()` function.
 
-- **3E.03 (In Progress):**
-  - Reconstructed the TSMOM portfolio and benchmark.
-  - Implemented signal-driven turnover calculations.
-  - Measured average monthly turnover (21.96%) and annualized turnover (263.54%).
-  - Implemented pre-rebalancing weight drift calculations.
-  - Actual portfolio turnover and transaction cost modeling remain pending.
+**Current focus: Phase 3E.04 — Net Performance Validation & Risk Dashboard.**
 
 The Test period (2022–2025) remains untouched until Phase 3F.
 
@@ -209,17 +210,19 @@ Phase 3E.02 evaluated TSMOM performance against an Equal-Weighted Long-Only benc
 
 TSMOM exhibited lower CAGR and Sharpe Ratios than the benchmark in both periods, alongside lower annualized volatility and smaller maximum drawdowns.
 
-These findings do not establish economic profitability or statistical significance. The analysis remains based on gross returns and excludes transaction costs, slippage, financing costs, and other implementation frictions.
+Phase 3E.03 incorporated drift-adjusted portfolio turnover and proportional transaction costs. Annualized turnover reached 297.62% for TSMOM, compared with 30.83% for the benchmark.
+
+Under the baseline cost assumption of 10 bps, the strategy achieved a net CAGR of 0.431% during Train and 0.041% during Validation, highlighting limited economic robustness. Statistical significance has not yet been established.
 
 Key limitations include:
 
 - **Statistical inference:** Predictive results have not yet established statistical significance.
 - **ETF proxies:** Returns may be affected by management fees, tracking differences, currency exposure, credit risk, and futures roll effects.
 - **Portfolio construction:** Equal Notional Weighting does not account for differences in asset volatility, correlations, or risk contributions.
-- **Trading frictions:** Signal-driven turnover and weight drift have been quantified. Actual portfolio turnover, transaction costs, slippage, financing costs, and short-selling constraints have not yet been fully modeled.
+- **Trading frictions:** Portfolio turnover and proportional transaction costs are modeled. Slippage, financing costs, market impact, and short-selling constraints remain unmodeled.
 - **Selection and model risk:** Survivorship bias, data snooping, and overfitting remain relevant methodological risks.
 
-Phase 3E will evaluate economic performance and realistic trading frictions on Train and Validation.
+Phase 3E.04 will consolidate net performance and risk analysis before statistical validation in Phase 3F.
 
 The Test period (2022–2025) remains untouched until Phase 3F.
 

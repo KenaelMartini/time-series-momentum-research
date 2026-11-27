@@ -48,4 +48,28 @@ def calculate_performance_metrics(returns, risk_free_rate=0):
         "Sharpe Ratio" : sharpe_ratio,
         "Max Drawdown" : max_drawdown
     }
-    
+
+def calculate_break_even_cost(metrics_df, cost_scenarios):
+    scenarios = sorted(cost_scenarios, key=cost_scenarios.get)
+
+    for i in range(0, len(scenarios) - 1, 1):
+        scenario1 = scenarios[i]
+        scenario2 = scenarios[i + 1]
+
+        g1 = metrics_df.loc[scenario1, "CAGR"]
+        g2 = metrics_df.loc[scenario2, "CAGR"]
+
+        c1 = cost_scenarios[scenario1] * 10000
+        c2 = cost_scenarios[scenario2] * 10000
+
+        if g1 > 0 and g2 < 0:
+
+            return ( c1 - (g1 / (g2 - g1)) * (c2 - c1))
+
+        if g1 == 0:
+            return c1
+
+        if g2 == 0:
+            return c2
+
+    return None
